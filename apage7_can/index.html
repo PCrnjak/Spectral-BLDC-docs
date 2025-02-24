@@ -1,0 +1,2675 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://PCrnjak.github.io/SPECTRAL_BLDC_DOCS/apage7_can/">
+      
+      
+        <link rel="prev" href="../apage6_uart/">
+      
+      
+        <link rel="next" href="../apage8_control_principles/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
+    
+    
+      
+        <title>CAN interface - SPECTRAL BLDC DOCS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8608ea7d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+      
+        <meta  property="og:type"  content="website" >
+      
+        <meta  property="og:title"  content="CAN interface - SPECTRAL BLDC DOCS" >
+      
+        <meta  property="og:description"  content="None" >
+      
+        <meta  property="og:image"  content="https://PCrnjak.github.io/SPECTRAL_BLDC_DOCS/assets/images/social/apage7_can.png" >
+      
+        <meta  property="og:image:type"  content="image/png" >
+      
+        <meta  property="og:image:width"  content="1200" >
+      
+        <meta  property="og:image:height"  content="630" >
+      
+        <meta  property="og:url"  content="https://PCrnjak.github.io/SPECTRAL_BLDC_DOCS/apage7_can/" >
+      
+        <meta  name="twitter:card"  content="summary_large_image" >
+      
+        <meta  name="twitter:title"  content="CAN interface - SPECTRAL BLDC DOCS" >
+      
+        <meta  name="twitter:description"  content="None" >
+      
+        <meta  name="twitter:image"  content="https://PCrnjak.github.io/SPECTRAL_BLDC_DOCS/assets/images/social/apage7_can.png" >
+      
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blur">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#can-interface" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SPECTRAL BLDC DOCS" class="md-header__button md-logo" aria-label="SPECTRAL BLDC DOCS" data-md-component="logo">
+      
+  <img src="../assets/Icon2.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SPECTRAL BLDC DOCS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              CAN interface
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blur"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blur"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SPECTRAL BLDC DOCS" class="md-nav__button md-logo" aria-label="SPECTRAL BLDC DOCS" data-md-component="logo">
+      
+  <img src="../assets/Icon2.png" alt="logo">
+
+    </a>
+    SPECTRAL BLDC DOCS
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage1_specs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Spectral micro datasheet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage2_getting_started/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage3_flashing_firmware/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flashing firmware
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage4_calibration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Calibration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage5_PID_tuning/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PID tuning
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage6_uart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    UART interface
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    CAN interface
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    CAN interface
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list-of-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#watchdog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Watchdog
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heartbeat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heartbeat
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cyclic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cyclic
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Commands
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Commands">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#respond_heartbeat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Respond_Heartbeat
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respond_data_pack_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Respond_data_pack_1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#respond_gripper_data_pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Respond_Gripper_data_pack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_data_pack_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_data_pack_1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_data_pack_pd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_data_pack_PD
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_gripper_data_pack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_gripper_data_pack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_gripper_calibrate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_gripper_calibrate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_pd_gains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_PD_Gains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_current_gains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Current_Gains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_velocity_gains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Velocity_Gains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_position_gains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Position_Gains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Limits
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_kt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Kt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_can_id" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_CAN_ID
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_estop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_ESTOP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_idle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Idle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_save_config" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Save_config
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_reset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Reset
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_clear_error" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Clear_Error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_watchdog" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Watchdog
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_heartbeat_setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Heartbeat_Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_cyclic_command" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Cyclic_command
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_respond_temperature" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Respond_Temperature
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_respond_voltage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Respond_Voltage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_respond_device_info" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Respond_Device_Info
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_respond_state_of_errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Respond_State_of_Errors
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_respond_iq_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Respond_Iq_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_respond_encoder_data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Respond_Encoder_data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_respond_ping" class="md-nav__link">
+    <span class="md-ellipsis">
+      Send_Respond_Ping
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#more-about-can" class="md-nav__link">
+    <span class="md-ellipsis">
+      More about CAN
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage8_control_principles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Control principles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage9_2_GUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GUI interface
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage9_3_tested_motors/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tested motors
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage9_4_theory_corner/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Theory corner
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apage9_5_troublestooting/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_14" id="__nav_14_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_14">
+            <span class="md-nav__icon md-icon"></span>
+            Guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/Arduino%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arduino guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/Bilateral%20teleoperation%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bilateral teleoperation guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/CAN%20bus%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CAN bus guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/Gravity%20compensation%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gravity compensation guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/Mobile%20robot%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mobile robot guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/Python%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/Quadruped%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quadruped robot guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/ROS2%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ROS2 guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/SIMPLEFOC%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simple FOC guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/Simple%20robot%20arm%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simple robot arm guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Guides/UART%20communication%20guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Serial terminal guide
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="can-interface">CAN interface</h1>
+<div class="admonition note annotate"></div>
+<p><strong>CAN bus</strong> should be your primary choice when developing robotic aplication. <br />
+Spectral micro uses 5V CAN bus that adheres to the CAN 2.0 standard. Each Spectral micro has 2 CAN bus connectors allowing you to easily daisy chain multiple devices. </p>
+<p align="left"> <img src="../assets/CANID.PNG" alt="drawing" width="700"/> <br /> </p>
+
+<p>Bits <strong>10 - 7</strong> of CAN ID represent Node ID. <br />
+Node IDs can range from 0 - 15 Meaning you can have maximum 16 different devices on one CAN bus.<br /></p>
+<p>Bits <strong>6 - 1</strong> of the CAN ID represent Command ID.<br />
+Command IDs can range from 0 - 63.</p>
+<p>Bit <strong>0</strong> represents error bit. If spectral micro BLDC controller has any active error this bit will be set to 1. Note this bit is send always by the driver and is independent about the command ID and data.</p>
+<p>Node with smallest Node ID is strongest in CAN bus arbitration.</p>
+<p><strong>If you want to learn more about CAN bus we recommend you read this <a href="">article!</a></strong></p>
+<p><strong>This page describes can protocol; Go to <a href="https://source-robotics.github.io/Spectral-BLDC-docs/Guides/CAN%20bus%20guide/">CAN bus guide</a> for hardware setup and examples</strong> <br />
+<strong>You can use our <a href="https://github.com/PCrnjak/Spectral-BLDC-Python/tree/main">Python CAN bus API</a> to communicate with your Spectral BLDC controllers!</strong> <br />
+<strong>If you want to se more examples on how to write Python scripts to control your motor over CAN <a href="https://source-robotics.github.io/Spectral-BLDC-docs/Guides/Python%20guide/">check this guide!</a></strong></p>
+<div class="admonition note annotate"></div>
+<h2 id="list-of-commands"><strong>List of commands</strong></h2>
+<div class="admonition tip annotate">
+<p class="admonition-title"><strong>Messages prefixed with Send are messages that the host can send to the Spectral BLDC controller. Note that to some of these messages the driver will respond with pre-defined message prefixed with Respond</strong></p>
+</div>
+<div class="admonition note annotate">
+<p class="admonition-title"><strong>Messages prefixed with Respond  are messages that the Spectral BLDC controller can send to the host.</strong></p>
+</div>
+<div class="admonition danger annotate">
+<p class="admonition-title"><strong>Messages prefixed with Send_Respond are messages that host can request from BLDC controller and it will respond with the desired data packet with the same Command ID as recived command. Host is sending these msgs with RTR bit and Spectral is responding with RTR 0 and some data packet.</strong></p>
+</div>
+<table>
+<thead>
+<tr>
+<th>Command ID</th>
+<th>Name</th>
+<th>Type</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>9</td>
+<td><code>Respond_Heartbeat</code></td>
+<td>Respond</td>
+<td>None</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>Respond_data_pack_1</code></td>
+<td>Respond</td>
+<td>Position [Encoder ticks] <br /> Velocity [Encoder ticks/s] <br /> Current [mA]</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>Respond_data_pack_2</code></td>
+<td>Respond</td>
+<td>Data</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>Respond_data_pack_3</code></td>
+<td>Respond</td>
+<td>Data</td>
+</tr>
+<tr>
+<td>60</td>
+<td><code>Respond_Gripper_data_pack</code></td>
+<td>Respond</td>
+<td>Position  <br /> Current <br /> Gripper activation status <br /> Gripper action status <br /> Object detection status  <br /> Temperature error <br /> Timeour error <br /> Estop error <br /> Calibration status</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Command ID</th>
+<th>Name</th>
+<th>Type</th>
+<th>Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td><code>Send_data_pack_1</code></td>
+<td>Send</td>
+<td>Position [Encoder ticks] <br /> Velocity [Encoder ticks/s] <br /> Current [mA]</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>Send_data_pack_2</code></td>
+<td>Send</td>
+<td>Data</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>Send_data_pack_3</code></td>
+<td>Send</td>
+<td>Data</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>Send_data_pack_PD</code></td>
+<td>Send</td>
+<td>Position [Encoder ticks] <br /> Velocity [Encoder ticks/s] <br /> Current [mA]</td>
+</tr>
+<tr>
+<td>61</td>
+<td><code>Send_gripper_data_pack</code></td>
+<td>Send</td>
+<td>Position  <br /> Velocity  <br /> Current [mA]  <br /> Gripper activation  <br /> Gripper action <br /> Estop status <br /> Release direction</td>
+</tr>
+<tr>
+<td>62</td>
+<td><code>Send_gripper_calibrate</code></td>
+<td>Send</td>
+<td>None</td>
+</tr>
+<tr>
+<td>16</td>
+<td><code>Send_PD_Gains</code></td>
+<td>Send</td>
+<td>KP <br /> KD</td>
+</tr>
+<tr>
+<td>17</td>
+<td><code>Send_Current_Gains</code></td>
+<td>Send</td>
+<td>Kpiq <br /> Kiiq</td>
+</tr>
+<tr>
+<td>18</td>
+<td><code>Send_Velocity_Gains</code></td>
+<td>Send</td>
+<td>Kpv <br /> Kiv</td>
+</tr>
+<tr>
+<td>19</td>
+<td><code>Send_Position_Gains</code></td>
+<td>Send</td>
+<td>Kpp</td>
+</tr>
+<tr>
+<td>20</td>
+<td><code>Send_Limits</code></td>
+<td>Send</td>
+<td>Velocity limit <br /> Current limit</td>
+</tr>
+<tr>
+<td>22</td>
+<td><code>Send_Kt</code></td>
+<td>Send</td>
+<td>Kt</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>Send_CAN_ID</code></td>
+<td>Send</td>
+<td>CAN ID</td>
+</tr>
+<tr>
+<td>0</td>
+<td><code>Send_ESTOP</code></td>
+<td>Send</td>
+<td>None</td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>Send_Idle</code></td>
+<td>Send</td>
+<td>None</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>Send_Save_config</code></td>
+<td>Send</td>
+<td>None</td>
+</tr>
+<tr>
+<td>14</td>
+<td><code>Send_Reset</code></td>
+<td>Send</td>
+<td>None</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>Send_Clear_Error</code></td>
+<td>Send</td>
+<td>None</td>
+</tr>
+<tr>
+<td>15</td>
+<td><code>Send_Watchdog</code></td>
+<td>Send</td>
+<td>Time <br /> Action</td>
+</tr>
+<tr>
+<td>30</td>
+<td><code>Send_Heartbeat_Setup</code></td>
+<td>Send</td>
+<td>Time</td>
+</tr>
+<tr>
+<td>29</td>
+<td><code>Send_Cyclic_command</code></td>
+<td>Send</td>
+<td>Data</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Command ID</th>
+<th>Name</th>
+<th>Type</th>
+<th>Respond data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>23</td>
+<td><code>Send_Respond_Temperature</code></td>
+<td>Send/Respond</td>
+<td>Temperature</td>
+</tr>
+<tr>
+<td>24</td>
+<td><code>Send_Respond_Voltage</code></td>
+<td>Send/Respond</td>
+<td>Vbus voltage</td>
+</tr>
+<tr>
+<td>25</td>
+<td><code>Send_Respond_Device_Info</code></td>
+<td>Send/Respond</td>
+<td>Serial number <br /> Hardware version <br /> Batch date <br /> software version</td>
+</tr>
+<tr>
+<td>26</td>
+<td><code>Send_Respond_State_of_Errors</code></td>
+<td>Send/Respond</td>
+<td>Error <br /> Temperature error <br /> Encoder error <br /> Vbus error <br /> Driver error <br /> Velocity error <br /> Current error <br /> ESTOP error <br /> Calibration status <br /> Activated status <br /> Watchdog error</td>
+</tr>
+<tr>
+<td>27</td>
+<td><code>Send_Respond_Iq_data</code></td>
+<td>Send/Respond</td>
+<td>Iq current</td>
+</tr>
+<tr>
+<td>28</td>
+<td><code>Send_Respond_Encoder_data</code></td>
+<td>Send/Respond</td>
+<td>Position [Encoder ticks] <br /> Velocity [Encoder ticks/s]</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>Send_Respond_Ping</code></td>
+<td>Send/Respond</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note annotate"></div>
+<h2 id="watchdog"><strong>Watchdog</strong></h2>
+<p><strong>By default watchdog is turned off.</strong><br />
+Each valid CAN message received by the spectral BLDC resets its watchdog timer.<br />
+Watchdog measures time between the commands that spectral BLDC receives.<br />
+If it is bigger than time you set it will report Watchdog error and go to error mode.
+To clear the error you will need to call:</p>
+<div class="language-text highlight"><pre><span></span><code>&quot;Send_Clear_Error&quot;
+</code></pre></div>
+<div class="admonition note annotate"></div>
+<h2 id="heartbeat"><strong>Heartbeat</strong></h2>
+<p><strong>By default heartbeat will send data at 1Hz or every 1 second.</strong><br />
+Hearbeat is function that will Send "Respond_Heartbeat" msg every time interval you set in "Send_Heartbeat_Setup". <br />
+This is usefull when your host device needs to see if spectral BLDC is connected/alive. <br />
+In case your spectral BLDC sends any other data (as a response to command) it will reset its heartbeat timer.</p>
+<div class="admonition tip annotate">
+<p class="admonition-title"><strong>Heartbeat timer reset</strong></p>
+<p>For example if spectral BLDC is sending data every 10ms and heartbeat is setup to send every 1s; hearbeat will never send its data. </p>
+</div>
+<div class="admonition note annotate"></div>
+<h2 id="cyclic"><strong>Cyclic</strong></h2>
+<p><strong>TODO</strong></p>
+<div class="admonition note annotate"></div>
+<h2 id="commands"><strong>Commands</strong></h2>
+<h3 id="respond_heartbeat"><strong>Respond_Heartbeat</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This is the command that driver will send as its heartbeat every X ms. It is an empty data frame.<br /></p>
+<ul>
+<li>Command ID: 9 <br /></li>
+<li>Direction: BLDC driver -&gt; host <br /></li>
+<li>Python call: None, this command is sent only by driver <br /></li>
+<li>Length: 0 byte<br /></li>
+<li>Type of frame: standard<br /></li>
+</ul>
+<hr />
+<h3 id="respond_data_pack_1"><strong>Respond_data_pack_1</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This is the command that driver will send as a response to movement commands like Send_data_pack_1 and Send_data_pack_PD. <br /></p>
+<ul>
+<li>Command ID: 3 <br /></li>
+<li>Direction: BLDC driver -&gt; host <br /></li>
+<li>Python call: None, this command is sent only by driver <br /></li>
+<li>Length: 8 byte<br /></li>
+<li>Type of frame: standard <br /></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable (Spectral_BLDC Lib python attribute)</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 2</td>
+<td>position</td>
+<td>signed 24bit</td>
+<td>unit is encoder ticks</td>
+</tr>
+<tr>
+<td>3 - 5</td>
+<td>velocity</td>
+<td>signed 24bit</td>
+<td>unit is encoder ticks /s</td>
+</tr>
+<tr>
+<td>6 - 7</td>
+<td>current</td>
+<td>signed 16bit</td>
+<td>unit is mA</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="respond_gripper_data_pack"><strong>Respond_Gripper_data_pack</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This is the command that driver will send as a response to Send_gripper_data_pack. <br /></p>
+<ul>
+<li>Command ID: 60 <br /></li>
+<li>Direction: BLDC driver -&gt; host <br /></li>
+<li>Python call: None, this command is sent only by driver <br /></li>
+<li>Length: 4 byte <br /></li>
+<li>Type of frame: standard <br /></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable (Spectral_BLDC Lib python attribute)</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>gripper_position</td>
+<td>unsigned 8bit</td>
+<td>255 fully closed, 0 fully open</td>
+</tr>
+<tr>
+<td>1-2</td>
+<td>gripper_current</td>
+<td>16 bit signed</td>
+<td>0 min current, 1300 max current, unit mA</td>
+</tr>
+<tr>
+<td>3(bit 0)</td>
+<td>gripper_activated</td>
+<td>bit (0/1)</td>
+<td>gripper activate (1) / deactivated (0)</td>
+</tr>
+<tr>
+<td>3(bit 1)</td>
+<td>gripper_action_status</td>
+<td>bit (0/1)</td>
+<td>1 is goto, 0 is idle or performing auto release or in calibration</td>
+</tr>
+<tr>
+<td>3(bit 2 and 3)</td>
+<td>gripper_object_detection</td>
+<td>2 bit</td>
+<td>0 in motion, 1 object detected closing, 2 object detected opening, 3 at positon</td>
+</tr>
+<tr>
+<td>3(bit 4)</td>
+<td>gripper_temperature_error</td>
+<td>bit (0/1)</td>
+<td>gripper_temperature_error</td>
+</tr>
+<tr>
+<td>3(bit 5)</td>
+<td>gripper_timeout_error</td>
+<td>bit (0/1)</td>
+<td>gripper_timeout_error</td>
+</tr>
+<tr>
+<td>3(bit 6)</td>
+<td>gripper_estop_error</td>
+<td>bit (0/1)</td>
+<td>gripper_estop_error</td>
+</tr>
+<tr>
+<td>3(bit 7)</td>
+<td>gripper_calibrated</td>
+<td>bit (0/1)</td>
+<td>gripper calibration status; calibrated (1) / not calibrated (0)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="send_data_pack_1"><strong>Send_data_pack_1</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will place the driver in position, speed or current control mode depending on the amount of paramters you give it.<br />
+Note that if you dont want feedforward just set it to 0. </p>
+<ul>
+<li>Command ID: 2 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python call: Send_data_pack_1() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Lenght: 8 byte -  If using positon setpoint with speed and current feedforward</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 2</td>
+<td>Position setpoint</td>
+<td>signed 24bit</td>
+<td>unit is encoder ticks</td>
+</tr>
+<tr>
+<td>3 - 5</td>
+<td>Velocity feedforward</td>
+<td>signed 24bit</td>
+<td>unit is encoder ticks/s</td>
+</tr>
+<tr>
+<td>6 - 7</td>
+<td>Current feedforward</td>
+<td>signed 16bit</td>
+<td>unit is mA</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Lenght: 5 byte -  If using speed setpoint and current feedforward</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 2</td>
+<td>Velocity setpoint</td>
+<td>signed 24bit</td>
+<td>unit is encoder ticks/s</td>
+</tr>
+<tr>
+<td>3 - 5</td>
+<td>Current feedforward</td>
+<td>signed 16bit</td>
+<td>unit is mA</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Lenght: 2 byte -  If using current setpoint</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 1</td>
+<td>Current setpoint</td>
+<td>signed 16bit</td>
+<td>unit is mA</td>
+</tr>
+</tbody>
+</table>
+<p>Driver will respons to this command with:<br />
+<strong>Respond_data_pack_1</strong></p>
+<hr />
+<h3 id="send_data_pack_pd"><strong>Send_data_pack_PD</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will place the driver in impedance PD control mode. </p>
+<ul>
+<li>Command ID: 4 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python call: Send_data_pack_PD() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 8 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 2</td>
+<td>Position</td>
+<td>signed 24bit</td>
+<td>unit is encoder ticks</td>
+</tr>
+<tr>
+<td>3 - 5</td>
+<td>Velocity</td>
+<td>signed 24bit</td>
+<td>unit is encoder ticks/s</td>
+</tr>
+<tr>
+<td>6 - 7</td>
+<td>Current</td>
+<td>signed 16bit</td>
+<td>unit is mA</td>
+</tr>
+</tbody>
+</table>
+<p>Driver will respond to this command with:<br />
+<strong>Respond_data_pack_1</strong></p>
+<hr />
+<h3 id="send_gripper_data_pack"><strong>Send_gripper_data_pack</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will command the motor (SSG48 gripper) to move to specific position with speed/torque.</p>
+<ul>
+<li>Command ID: 61 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_gripper_data_pack() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 5 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Position</td>
+<td>unsigned 8bit</td>
+<td>0 fully open, 255 fully closed</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Velocity</td>
+<td>unsigned 8bit</td>
+<td>0 min speed, 255 max speed</td>
+</tr>
+<tr>
+<td>2-3</td>
+<td>Current</td>
+<td>signed 16bit</td>
+<td>0 min current, 1300 max current, unit mA</td>
+</tr>
+<tr>
+<td>4(bit 0)</td>
+<td>Gripper activate</td>
+<td>bit (0/1)</td>
+<td>0 deactivate the gripper, 1 activate the gripper</td>
+</tr>
+<tr>
+<td>4(bit 1)</td>
+<td>Gripper action status</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>4(bit 2)</td>
+<td>Gripper estop status</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>4(bit 3)</td>
+<td>Gripper release direction</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Driver will respond to this command with:<br />
+<strong>Respond_Gripper_data_pack</strong></p>
+<p>Alternatively you can send empty Send_gripper_data_pack command.</p>
+<ul>
+<li>Command ID: 61 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_gripper_data_pack() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p>Driver will respons to this command with:<br />
+<strong>Respond_Gripper_data_pack</strong></p>
+<hr />
+<h3 id="send_gripper_calibrate"><strong>Send_gripper_calibrate</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will start gripper calibration. It is an empty data frame.</p>
+<ul>
+<li>Command ID: 62 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_gripper_calibrate() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_pd_gains"><strong>Send_PD_Gains</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set KP and KD gains for the PD impedance loop.</p>
+<ul>
+<li>Command ID: 16 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_PD_Gains() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 8 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 3</td>
+<td>KP</td>
+<td>float 32</td>
+</tr>
+<tr>
+<td>4 - 7</td>
+<td>KD</td>
+<td>float 32</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_current_gains"><strong>Send_Current_Gains</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set Ki and Kp PI parameters for the PI current control loop.</p>
+<ul>
+<li>Command ID: 17 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Current_Gains() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 8 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 3</td>
+<td>Kp_iq</td>
+<td>float 32</td>
+</tr>
+<tr>
+<td>4 - 7</td>
+<td>Ki_iq</td>
+<td>float 32</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_velocity_gains"><strong>Send_Velocity_Gains</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set Ki and Kp PI parameters for the PI speed/velocity control loop.</p>
+<ul>
+<li>Command ID: 18 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Velocity_Gains() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 8 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 3</td>
+<td>Kpv</td>
+<td>float 32</td>
+</tr>
+<tr>
+<td>4 - 7</td>
+<td>Kiv</td>
+<td>float 32</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_position_gains"><strong>Send_Position_Gains</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set Kp P parameter for the P position control loop.</p>
+<ul>
+<li>Command ID: 19 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Position_Gains() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 4 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 3</td>
+<td>Kpp</td>
+<td>float 32</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_limits"><strong>Send_Limits</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set velocity/speed and current limits.<br />
+This will limit max speed and current that can be reached during motor operation.</p>
+<ul>
+<li>Command ID: 20 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Limits() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 8 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 3</td>
+<td>Velocity limit</td>
+<td>float 32</td>
+<td>unit is encoder ticks/s</td>
+</tr>
+<tr>
+<td>3 - 7</td>
+<td>Current limit</td>
+<td>float 32</td>
+<td>unit is mA</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_kt"><strong>Send_Kt</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set Kt of the motor driver.</p>
+<ul>
+<li>Command ID: 22 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Kt() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 4 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 3</td>
+<td>Kt</td>
+<td>float 32</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_can_id"><strong>Send_CAN_ID</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set a new CAN ID for your motor driver. <br />
+Note that ID you send is the new motor ID.</p>
+<ul>
+<li>Command ID: 11 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_CAN_ID() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 1 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>ID</td>
+<td>byte</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_estop"><strong>Send_ESTOP</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will stop the motor and set ESTOP error to 1.<br />
+ It is an empty data frame.</p>
+<ul>
+<li>Command ID: 0 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_ESTOP() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_idle"><strong>Send_Idle</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set the motor driver to idle state. <br />
+It is an empty data frame.</p>
+<ul>
+<li>Command ID: 12 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Idle() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_save_config"><strong>Send_Save_config</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will save the current motor config to the EEPROM.<br />
+ It is an empty data frame.</p>
+<ul>
+<li>Command ID: 13 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Save_config() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_reset"><strong>Send_Reset</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will reset the MCU of the motor driver.<br /> 
+It is an empty data frame.</p>
+<ul>
+<li>Command ID: 14 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Reset() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_clear_error"><strong>Send_Clear_Error</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will clear all active errors of the motor driver. <br />
+It is an empty data frame.</p>
+<ul>
+<li>Command ID: 1 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Clear_Error() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver will not respond to this command!</strong><br /></p>
+<hr />
+<h3 id="send_watchdog"><strong>Send_Watchdog</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set Watchdog parameters like watchdog time and action.</p>
+<ul>
+<li>Command ID: 15 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Watchdog() <br /></li>
+<li>Type of frame: REMOTE <br /></li>
+<li>Length: 5 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 3</td>
+<td>watchdog_time_ms</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Action</td>
+<td>int</td>
+<td>*Not implemented</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="send_heartbeat_setup"><strong>Send_Heartbeat_Setup</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will set heartbeat paramters of the motor driver.</p>
+<ul>
+<li>Command ID: 30 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Heartbeat_Setup() <br /></li>
+<li>Type of frame: REMOTE <br /></li>
+<li>Length: 4 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 3</td>
+<td>Heartbeat_rate_ms</td>
+<td>int</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="send_cyclic_command"><strong>Send_Cyclic_command</strong></h3>
+<p><strong>TODO</strong></p>
+<hr />
+<h3 id="send_respond_temperature"><strong>Send_Respond_Temperature</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will request that motor driver responds with its current temperature. (Temperature of the thermistor).
+ <br /> Direction host -&gt; driver is remote frame and direction driver -&gt; host is standard data frame.</p>
+<ul>
+<li>Command ID: 23 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Respond_Temperature() <br /></li>
+<li>Type of frame: REMOTE <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver respond to this command with:</strong><br /></p>
+<ul>
+<li>Command ID: 23 <br /></li>
+<li>Direction: BLDC driver -&gt; Host <br /></li>
+<li>Python API reference: Send_Respond_Temperature() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 2 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable (Spectral_BLDC Lib python attribute)</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 1</td>
+<td>temperature</td>
+<td>16 bit signed</td>
+<td>unit of degrees</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="send_respond_voltage"><strong>Send_Respond_Voltage</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will request that motor driver responds with its current supply voltage.
+ <br /> Direction host -&gt; driver is remote frame and direction driver -&gt; host is standard data frame.</p>
+<ul>
+<li>Command ID: 24 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Respond_Voltage() <br /></li>
+<li>Type of frame: REMOTE <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver respond to this command with:</strong><br /></p>
+<ul>
+<li>Command ID: 24 <br /></li>
+<li>Direction: BLDC driver -&gt; Host <br /></li>
+<li>Python API reference: Send_Respond_Voltage() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 2 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable (Spectral_BLDC Lib python attribute)</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 1</td>
+<td>voltage</td>
+<td>16 bit unsigned</td>
+<td>unit of mV</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="send_respond_device_info"><strong>Send_Respond_Device_Info</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will request that motor driver responds with its version information saved in the EEPROM. 
+ <br /> Direction host -&gt; driver is remote frame and direction driver -&gt; host is standard data frame.</p>
+<ul>
+<li>Command ID: 25 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Respond_Device_Info() <br /></li>
+<li>Type of frame: REMOTE <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver respond to this command with:</strong><br /></p>
+<ul>
+<li>Command ID: 25 <br /></li>
+<li>Direction: BLDC driver -&gt; Host <br /></li>
+<li>Python API reference: Send_Respond_Device_Info() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 7 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable (Spectral_BLDC Lib python attribute)</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>HARDWARE_VERSION</td>
+<td>byte</td>
+<td>harware version of the driver</td>
+</tr>
+<tr>
+<td>1</td>
+<td>BATCH_DATE</td>
+<td>byte</td>
+<td>date when the batch was produced</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SOFTWARE_VERSION</td>
+<td>byte</td>
+<td>version of the software on the driver</td>
+</tr>
+<tr>
+<td>3 - 6</td>
+<td>SERIAL_NUMBER</td>
+<td>32 bit</td>
+<td>serial number of the driver</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="send_respond_state_of_errors"><strong>Send_Respond_State_of_Errors</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will request that motor driver responds with state of all possible errors.
+ <br /> Direction host -&gt; driver is remote frame and direction driver -&gt; host is standard data frame.</p>
+<ul>
+<li>Command ID: 26 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Respond_State_of_Errors() <br /></li>
+<li>Type of frame: REMOTE <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver respond to this command with:</strong><br /></p>
+<ul>
+<li>Command ID: 26 <br /></li>
+<li>Direction: BLDC driver -&gt; Host <br /></li>
+<li>Python API reference: Send_Respond_State_of_Errors() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 2 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable (Spectral_BLDC Lib python attribute)</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0(bit 0)</td>
+<td>error</td>
+<td>bit (0/1)</td>
+<td>General error</td>
+</tr>
+<tr>
+<td>0(bit 1)</td>
+<td>temperature_error</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>0(bit 2)</td>
+<td>encoder_error</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>0(bit 3)</td>
+<td>vbus_error</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>0(bit 4)</td>
+<td>driver_error</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>0(bit 5)</td>
+<td>velocity_error</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>0(bit 6)</td>
+<td>current_error</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>0(bit 7)</td>
+<td>estop_error</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>1(bit 0)</td>
+<td>calibrated</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>1(bit 0)</td>
+<td>activated</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+<tr>
+<td>1(bit 0)</td>
+<td>watchdog_error</td>
+<td>bit (0/1)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="send_respond_iq_data"><strong>Send_Respond_Iq_data</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will request that motor driver responds with current Iq current data.
+ <br /> Direction host -&gt; driver is remote frame and direction driver -&gt; host is standard data frame.</p>
+<ul>
+<li>Command ID: 27 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Respond_Iq_data() <br /></li>
+<li>Type of frame: REMOTE <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver respond to this command with:</strong><br /></p>
+<ul>
+<li>Command ID: 27 <br /></li>
+<li>Direction: BLDC driver -&gt; Host <br /></li>
+<li>Python API reference: Send_Respond_Iq_data() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 2 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable (Spectral_BLDC Lib python attribute)</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 1</td>
+<td>current</td>
+<td>signed 16bit</td>
+<td>unit is mA</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="send_respond_encoder_data"><strong>Send_Respond_Encoder_data</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will request that motor driver responds with current encoder position and speed data.
+ <br /> Direction host -&gt; driver is remote frame and direction driver -&gt; host is standard data frame.</p>
+<ul>
+<li>Command ID: 28 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Respond_Encoder_data() <br /></li>
+<li>Type of frame: REMOTE <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver respond to this command with:</strong><br /></p>
+<ul>
+<li>Command ID: 28 <br /></li>
+<li>Direction: BLDC driver -&gt; Host <br /></li>
+<li>Python API reference: Send_Respond_Encoder_data() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 8 byte </li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Size (bytes)</th>
+<th>Variable (Spectral_BLDC Lib python attribute)</th>
+<th>Type</th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0 - 3</td>
+<td>position</td>
+<td>signed 32bit</td>
+<td>unit is encoder ticks</td>
+</tr>
+<tr>
+<td>4 - 7</td>
+<td>velocity</td>
+<td>signed 32bit</td>
+<td>unit is encoder ticks/s</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="send_respond_ping"><strong>Send_Respond_Ping</strong></h3>
+<div class="admonition note annotate"></div>
+<p>This command will request that motor driver responds with its own ping. 
+ <br /> Direction host -&gt; driver is remote frame and direction driver -&gt; host is standard data frame.</p>
+<ul>
+<li>Command ID: 10 <br /></li>
+<li>Direction: Host -&gt; BLDC driver <br /></li>
+<li>Python API reference: Send_Respond_Ping() <br /></li>
+<li>Type of frame: REMOTE <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<p><strong>Driver respond to this command with:</strong><br /></p>
+<ul>
+<li>Command ID: 10 <br /></li>
+<li>Direction: BLDC driver -&gt; Host<br /></li>
+<li>Python API reference: Send_Respond_Ping() <br /></li>
+<li>Type of frame: standard <br /></li>
+<li>Length: 0 byte </li>
+</ul>
+<div class="admonition note annotate"></div>
+<h2 id="more-about-can"><strong>More about CAN</strong></h2>
+<p>In CAN (Controller Area Network) communication, each byte of data within a CAN frame is transmitted as a sequence of bits. Each bit is transmitted serially, starting with the least significant bit (LSB) and ending with the most significant bit (MSB).<br /></p>
+<p>So, if you send a byte with the value 0b10110000, it will be transmitted over the CAN bus as follows:<br /></p>
+<ul>
+<li>Start Bit: The start bit is transmitted first (LSB).<br /></li>
+<li>Data Bits: The data bits are transmitted serially, starting with the LSB (bit[0] = 0) and ending with the MSB (bit[7] = 1).<br /></li>
+</ul>
+<p>Therefore, in the case of your byte 0b10110000, it will be transmitted as follows:<br /></p>
+<p>Start Bit | Data Bits (LSB first) <br /></p>
+<p>0       |     0  0  0  0  1  1  0  1 <br /></p>
+<p>transmition of bytes is LSB byte first. So if we have data packet of 4 bytes; byte 3,2,1,0; byte 3 will be sent first and byte 0 last.<br /></p>
+<p>Data is packed in arrays so that for 16 bit number, 8 MSB bits go to array index 0 and 8 LSB bits go to array index 1.<br />
+When transmitting that data If you look here: https://en.wikipedia.org/wiki/CAN_bus LSB are sent first so array element with index 1 is transmitted first.<br />
+So if we have number that is 32814 decimal: MSB byte[0] = 1000 0000 , LSB byte[1] = 0101 1010 <br />
+It will be sent like this 0101 1010 0000 0001 <br /></p>
+<p>Transmitting floats is following the IEEE 754 floating-point format.<br /></p>
+<p>In IEEE 754 format, a single-precision floating-point number (float) is represented using 32 bits, with the following components:<br /></p>
+<p>Sign bit: 1 bit, representing the sign of the number.<br />
+Exponent bits: 8 bits, representing the exponent of the number.<br />
+Fraction bits: 23 bits, representing the fractional part of the number.<br />
+The function you provided interprets the input array of 4 bytes as a 32-bit integer and then uses a union to reinterpret those bits as a float. The bit manipulation <br />performed by shifting the bytes and combining them respects the layout of IEEE 754 floating-point numbers, assuming that the byte order of the system is big-endian.<br /></p>
+<p>Therefore, this function can be used to convert an array of 4 bytes representing a IEEE 754 float to its equivalent floating-point value.<br /></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2023 <a href="https://github.com/PCrnjak"  target="_blank" rel="noopener">Petar Crnjak</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/PCrnjak" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.instagram.com/5arcrnjak/" target="_blank" rel="noopener" title="www.instagram.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141m0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7m146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8m76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8M398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/SourceRobotics" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.linkedin.com/in/petar-crnjak-009b43180/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3M135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5m282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.gg/prjUvjmGpZ" target="_blank" rel="noopener" title="discord.gg" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M524.531 69.836a1.5 1.5 0 0 0-.764-.7A485 485 0 0 0 404.081 32.03a1.82 1.82 0 0 0-1.923.91 338 338 0 0 0-14.9 30.6 447.9 447.9 0 0 0-134.426 0 310 310 0 0 0-15.135-30.6 1.89 1.89 0 0 0-1.924-.91 483.7 483.7 0 0 0-119.688 37.107 1.7 1.7 0 0 0-.788.676C39.068 183.651 18.186 294.69 28.43 404.354a2.02 2.02 0 0 0 .765 1.375 487.7 487.7 0 0 0 146.825 74.189 1.9 1.9 0 0 0 2.063-.676A348 348 0 0 0 208.12 430.4a1.86 1.86 0 0 0-1.019-2.588 321 321 0 0 1-45.868-21.853 1.885 1.885 0 0 1-.185-3.126 251 251 0 0 0 9.109-7.137 1.82 1.82 0 0 1 1.9-.256c96.229 43.917 200.41 43.917 295.5 0a1.81 1.81 0 0 1 1.924.233 235 235 0 0 0 9.132 7.16 1.884 1.884 0 0 1-.162 3.126 301.4 301.4 0 0 1-45.89 21.83 1.875 1.875 0 0 0-1 2.611 391 391 0 0 0 30.014 48.815 1.86 1.86 0 0 0 2.063.7A486 486 0 0 0 610.7 405.729a1.88 1.88 0 0 0 .765-1.352c12.264-126.783-20.532-236.912-86.934-334.541M222.491 337.58c-28.972 0-52.844-26.587-52.844-59.239s23.409-59.241 52.844-59.241c29.665 0 53.306 26.82 52.843 59.239 0 32.654-23.41 59.241-52.843 59.241m195.38 0c-28.971 0-52.843-26.587-52.843-59.239s23.409-59.241 52.843-59.241c29.667 0 53.307 26.82 52.844 59.239 0 32.654-23.177 59.241-52.844 59.241"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://www.patreon.com/PCrnjak" target="_blank" rel="noopener" title="www.patreon.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M489.7 153.8c-.1-65.4-51-119-110.7-138.3C304.8-8.5 207-5 136.1 28.4 50.3 68.9 23.3 157.7 22.3 246.2 21.5 319 28.7 510.6 136.9 512c80.3 1 92.3-102.5 129.5-152.3 26.4-35.5 60.5-45.5 102.4-55.9 72-17.8 121.1-74.7 121-150z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy", "content.code.select"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>
